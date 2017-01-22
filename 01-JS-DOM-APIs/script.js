@@ -18,11 +18,17 @@ function joke(){
 }
 
 function repoSearch(){
+  
   let oldList = document.getElementById("repoList");
   if (oldList) {
     document.body.removeChild(oldList);
   }
-  let response = ajaxCall({method:"GET", url:"https://api.github.com/search/repositories?q='JavaScript"});
+
+  let keyword = document.getElementById("search").value;
+
+  if (keyword === "") { keyword = "JavaScript"}
+
+  let response = ajaxCall({method:"GET", url:"https://api.github.com/search/repositories?q='" + keyword+ "'"});
   response.then(function(res){
     //console.log(res);
     
