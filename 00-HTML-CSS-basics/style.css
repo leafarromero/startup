@@ -1,5 +1,6 @@
-section {
+#fade{
 	text-align: center;
 	opacity: 0;
+	float: left;
 }
 
