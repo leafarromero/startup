@@ -5,18 +5,16 @@ function FadeIn(id){
 }
 
 function joke(){
-  let xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "http://api.icndb.com/jokes/random", true);
-  xhttp.onload = function() {
-    const text = JSON.parse(xhttp.responseText);
-    document.getElementById("joke").innerHTML = text.value.joke;
-  };
-  xhttp.send();
-
+  
+  let response = ajaxCall({method:"GET", url:"http://api.icndb.com/jokes/random"});
+  response.then( function(res){
+    text = JSON.parse(res);
+    document.getElementById("joke").innerHTML = text.value.joke
+  });
 }
 
-function ajaxCall(conf:Object){
-  return new Promise(resolve, reject){
+function ajaxCall(conf){
+  return new Promise(function (resolve, reject) {
     if(!conf.async){
     conf.async = true;
     }
@@ -34,5 +32,5 @@ function ajaxCall(conf:Object){
     xhttp.onerror = function() {
       reject(this.status);
     };
-  }
+  });
 }
