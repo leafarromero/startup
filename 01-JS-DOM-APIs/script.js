@@ -1,4 +1,4 @@
-function FadeIn(id){
+function fadeIn(id){
   let element = document.getElementById(id);
   element.style.transition = "opacity 3.0s linear 1s";
   element.style.opacity = 1;      
@@ -84,4 +84,19 @@ function ajaxCall(conf){
       reject(this.status);
     };
   });
+}
+
+function addTable(matrix){
+
+  let table = document.createElement("table");
+  for (let i = 0; i < matrix.length; i++) {
+    let row = document.createElement("tr");
+    for (let j = 0; j < matrix[i].length; j++) {
+      let entry = document.createElement("td");
+      entry.innerHTML = matrix[i][j];
+      row.appendChild(entry);
+    }
+    table.appendChild(row);
+  }
+  document.body.appendChild(table);
 }
