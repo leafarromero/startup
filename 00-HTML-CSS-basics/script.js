@@ -7,9 +7,14 @@ function FadeIn(id){
 function joke(){
   
   let response = ajaxCall({method:"GET", url:"http://api.icndb.com/jokes/random"});
-  response.then( function(res){
+  response.then(function(res){
     text = JSON.parse(res);
-    document.getElementById("joke").innerHTML = text.value.joke
+    document.getElementById("joke").innerHTML = text.value.joke;
+    handleError(res);
+  })
+  .catch( function handleError (res){
+    let element = document.getElementById("fade");
+    element.style.color = "Red";
   });
 }
 
