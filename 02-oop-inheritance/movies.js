@@ -44,6 +44,7 @@ class movie extends EventEmitter {
     this.title = title;
     this.year = year;
     this.duration = duration;
+    this.cast = [];
     
   }
   
@@ -55,6 +56,14 @@ class movie extends EventEmitter {
   }
   resume(){
     this.emit("resume");
+  }
+
+  addCast(otherCast){
+    if(typeof(otherCast) === actor){
+      this.cast.push(otherCast);
+    }else{
+      this.cast = this.cast.concat(otherCast);
+    }
   }
 
 }
@@ -69,12 +78,29 @@ class logger {
 
 }
 
+class actor {
+  constructor(name, age){
+    this.name = name;
+    this.age = age;
+  }
+}
+
+let social = {
+  likes: function(friendName){
+    console.log(`${friendName} likes ${this.title}`);
+  },
+
+  share: function(friendName){
+    console.log(`Share ${this.title} with ${friendName}`);
+  }
+}
+
 
 function test(){
 
-  let movie1 = new movie("The godfather", 1980, 120);
-  let movie2 = new movie("Terminator", 1984, 90);
-  let movie3 = new movie("Casablanca", 1960, 120);
+  let movie1 = new movie("The godfather", 1972, 178);
+  let movie2 = new movie("Terminator", 1984, 108);
+  let movie3 = new movie("Casablanca", 1942, 102);
 
   let logger1 = new logger();
   let logger2 = new logger();
@@ -94,5 +120,19 @@ function test(){
   movie2.resume();
   movie3.pause();
 
+
+  movie1 = Object.assign(movie1, social);
+  movie1.likes("Agustin");
+  movie1.share("Martin");
+
+  let pacino = new actor("Al Pacino", 76);
+  let otherCast = [
+    new actor("Marlon Brando", 80),
+    new actor("Robert Duvall", 86),
+    new actor("James Caan", 76),
+  ]
+
+  movie1.addCast(pacino);
+  movie1.addCast(otherCast);
 
 }
