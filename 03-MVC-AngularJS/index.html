@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <base href="/">
+  <title>Test page</title>
+  <script
+  src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js">
+  </script>
+  <script
+  src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-route.js">
+  </script>
+  <script
+  src="https://cdn.jsdelivr.net/ngstorage/0.3.6/ngStorage.min.js">
+  </script>
+  <script type="text/javascript" src="script.js"></script>
+</head>
+
+<body ng-app = "movieList"  ng-controller = "listCtrl">
+  <ul>
+    <li ng-repeat = "movie in $storage.records"> <a href="/detail" ng-click ="detailMovie(movie)">{{movie.name}}</a><span ng-click="removeMovie($index)">x</span></li>
+  </ul>
+  Name: <input ng-model = "name"><br>
+  Year: <input ng-model = "year"><br>
+  Duration: <input ng-model = "duration"><br>
+  <button ng-click = "addMovie()">Add</button>
+  <a href="/">Main</a> <a href="/test">Test</a>
+  <section ng-view></section>
+
+</body>
+</html>
