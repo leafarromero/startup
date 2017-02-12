@@ -25,7 +25,24 @@ request.onsuccess = function(event) {
 request.onupgradeneeded = function(event) {
     db = event.target.result;
     let objectStore = db.createObjectStore("text", {keyPath: "id"});
-}
+};
+
+
+//websocket
+
+let ws = new WebSocket("ws://echo.websocket.org/");
+
+ws.onopen = function (e){
+	console.log("CONNECTED");
+};
+
+ws.onclose = function (e){
+	console.log("DISCONNECTED");
+};
+
+ws.onmessage = function (e){
+	console.log("echo: " + e.data);
+};	
 
 //Modulo de angular
 
@@ -94,10 +111,16 @@ review.controller('reviewCtrl', function($scope, $localStorage){
 	        holder.innerText = event.target.result;
 	    };
 	    console.log(file);
+
+
 	    reader.readAsText(file);
 
 	    return false;
-};
+	};
 
+	$scope.wsEcho = function(){
+		if ($scope.text) {ws.send($scope.text);}
+		else {ws.send("default message")};
+	};
 
 });
