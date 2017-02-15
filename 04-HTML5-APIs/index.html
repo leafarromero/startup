@@ -19,13 +19,27 @@
 
 <body ng-app = "APIreview"  ng-controller = "reviewCtrl">
 
-	<textarea id="holder" ng-model = "text"></textarea>
-	<button ng-click = "saveContents()">Save</button>
-	<button ng-click = "clearContents()">Clear</button>
-	<button ng-click = "wsEcho()">Echo</button>
+	<header><h1>API review</h1></header>
 
-	<canvas id = "canvas"></canvas>
-	<button ng-click = "drawShapes()">Draw</button>
+	<section>
+		<h2>IndexedDB and websocket</h2>
+		<textarea id="holder" ng-model = "text"></textarea><br>
+		<button ng-click = "saveContents()">Save</button>
+		<button ng-click = "clearContents()">Clear</button>
+		<button ng-click = "wsEcho()">Echo</button>
+	</section>
+	
+	<section>
+		<h2>Canvas</h2>
+		<canvas id = "canvas"></canvas><br>
+		<button ng-click = "drawShapes()">Draw</button>
+	</section>
+
+	<section>
+		<h2>Canvas 2</h2>
+		<canvas id="canvas2"></canvas>
+	</section>
+	
 
 </body>
 </html>
