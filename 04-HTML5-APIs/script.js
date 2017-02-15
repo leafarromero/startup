@@ -17,6 +17,8 @@ request.onerror = function(event) {
 request.onsuccess = function(event) {
   db = request.result;
   console.log("success: "+ db);
+  db.onsuccess =function(event){console.log("SUCCESS: " + event.target.result);};
+  db.onerror =function(event){console.log("ERROR" ) + event.target.error;};
 };
 
 request.onupgradeneeded = function(event) {
@@ -69,7 +71,6 @@ function drawRandomSquare(canvas, context, fill) {
   if(fill) {context.fill();} else {context.stroke();}
 }
 
-// Function to draw Circle on canvas
 function drawCircle(canvas, context, fill) {
   // Here we created a random raidus for circle
   let radius = Math.floor(Math.random() * 40);
@@ -92,14 +93,6 @@ function drawStableSquare(rectangle, context) {
         context.stroke();
 }
 
-let rectangle = {
-        x: 0,
-        y: 75,
-        width: 100,
-        height: 50,
-        borderWidth: 5,
-        direction: "right"
-};
 
 function animate (rectangle, canvas, context, startTime, linearSpeed){
     // update
@@ -137,8 +130,16 @@ function animate (rectangle, canvas, context, startTime, linearSpeed){
 
     // request new frame
     window.requestAnimFrame( function(){ animate(rectangle, canvas, context, startTime, 100) });
-  }
+}
 
+let rectangle = {
+        x: 0,
+        y: 75,
+        width: 100,
+        height: 50,
+        borderWidth: 5,
+        direction: "right"
+};
 
 
 
@@ -148,7 +149,6 @@ let review = angular.module('APIreview', ["ngStorage"]);
 review.controller('reviewCtrl', function($scope, $localStorage){
 
   //Funciones para guardar y borrar el texto
-  //TODO: meter los handlers de success y error que faltan.
   $scope.$storage = $localStorage;
 
   $scope.saveContents = function(){
@@ -243,15 +243,14 @@ review.controller('reviewCtrl', function($scope, $localStorage){
     }
   };
 
-  //Dibujar cuando se carga la pagina  
-  angular.element(document).ready(function () {$scope.drawShapes();});
-
-
-  //Animar cuando se carga la pantalla
+  //Dibujar y animar cuando se carga la pagina  
   let canvas2 = document.getElementById("canvas2");
   let context2 = canvas2.getContext("2d");
+
   angular.element(document).ready(function () {
+    $scope.drawShapes();
     animate(rectangle, canvas2, context2, (new Date()).getTime(), 100);
   });
 
+  
 });
