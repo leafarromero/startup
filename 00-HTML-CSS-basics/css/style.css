@@ -1,0 +1,55 @@
+#mainHeader {
+	background-color: red;
+	text-align: center;
+}
+
+#mainFooter {
+	background-color: blue;
+	text-align: center;
+}
+
+nav {
+	width: 25%;
+	background-color: orange;
+	display: table-cell;
+}
+
+section {
+	width: 50%;
+	text-align: center;
+	display: table-cell;
+}
+
+aside {
+	width: 25%;
+	background-color: pink;
+	display: table-cell;
+}
+
+.content {
+	font-size: 14px;
+}
+
+.header {
+	font-size: 46px;
+}
+
+.footer {
+	font-size: 10px;
+}
+
+.navigation {
+	font-size: 12px;
+}
+
+.sidebar {
+	font-size: 10px;
+}
+
+*[class $= 'r']{
+	background-color: magenta;
+}
+
+*[class *= 'a']:not(*[class $= 'r']){
+	background-color: blue;
+}

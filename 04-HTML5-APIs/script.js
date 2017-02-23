@@ -250,7 +250,5 @@ review.controller('reviewCtrl', function($scope, $localStorage){
   angular.element(document).ready(function () {
     $scope.drawShapes();
     animate(rectangle, canvas2, context2, (new Date()).getTime(), 100);
-  });
-
-  
+  }); 
 });
